@@ -1,147 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulario Tuenti</title>
+  <meta charset="UTF-8">
+  <title>Formulario de seguridad Tuenti</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
-
-    .form-container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      text-align: center;
-    }
-
-    .form-container img {
-      width: 80px;
-      margin-bottom: 15px;
-    }
-
-    h1 {
-      color: #333;
-      margin-bottom: 25px;
-    }
-
-    label, p {
-      font-weight: bold;
-      margin-top: 15px;
-      display: block;
-      text-align: left;
-    }
-
-    input[type="email"],
-    input[type="tel"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    input[type="radio"] {
-      margin-right: 8px;
-    }
-
-    button {
-      width: 100%;
-      background-color: #ec008c;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    button:hover {
-      background-color: #c40076;
-    }
-
-    .firma {
-      text-align: center;
-      margin-top: 30px;
-      color: #888;
-      font-style: italic;
-    }
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    textarea, input, select { width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 10px 20px; margin-right: 10px; cursor: pointer; background-color: #ff0066; color: white; border: none; border-radius: 4px; }
+    button:hover { background-color: #e6005c; }
+    h2 { color: #ff0066; }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <img src="unnamed.png" alt="Logo Tuenti" />
-    <h1>Formulario de preguntas de seguridad Tuenti</h1>
+  <h2>Formulario de preguntas de seguridad Tuenti</h2>
 
-    <form id="miFormulario">
-      <label for="numeroRecuperar">Número a recuperar:</label>
-      <input type="tel" id="numeroRecuperar" name="numeroRecuperar" required />
+  <label>Número a recuperar:</label>
+  <input type="text" id="numeroRecuperar">
 
-      <label for="correo">1) ¿Cuál es el correo que está asociado a tu cuenta de APP?</label>
-      <input type="email" id="correo" name="correo" required />
+  <label>¿Cuál es el correo que está asociado a tu cuenta de APP?</label>
+  <input type="email" id="correoApp">
 
-      <p>2) ¿Cuál fue el Combo que compraste con más frecuencia en los últimos 3 meses?</p>
-      <label><input type="radio" name="combo" value="a) Combo $1" /> a) Combo $1</label><br/>
-      <label><input type="radio" name="combo" value="b) Combo $2" /> b) Combo $2</label><br/>
-      <label><input type="radio" name="combo" value="c) Combo $4" /> c) Combo $4</label><br/>
-      <label><input type="radio" name="combo" value="d) Combo $8" /> d) Combo $8</label><br/>
-      <label><input type="radio" name="combo" value="e) Combo $10" /> e) Combo $10</label><br/>
-      <label><input type="radio" name="combo" value="f) Combo $20" /> f) Combo $20</label><br/>
-      <label><input type="radio" name="combo" value="g) Combo $25" /> g) Combo $25</label><br/>
-      <label><input type="radio" name="combo" value="h) Ninguno" /> h) Ninguno</label><br/>
+  <label>¿Cuál fue el Combo que compraste con más frecuencia en los últimos 3 meses?</label>
+  <select id="combo">
+    <option value="a) Combo $1">a) Combo $1</option>
+    <option value="b) Combo $2">b) Combo $2</option>
+    <option value="c) Combo $4">c) Combo $4</option>
+    <option value="d) Combo $8">d) Combo $8</option>
+    <option value="e) Combo $10">e) Combo $10</option>
+    <option value="f) Combo $15">f) Combo $15</option>
+    <option value="g) Combo $20">g) Combo $20</option>
+    <option value="h) Combo $25">h) Combo $25</option>
+    <option value="i) Ninguno">i) Ninguno</option>
+  </select>
 
-      <label for="telefono">3) ¿Número al que más llamas con frecuencia? </label>
-      <input type="text" id="telefono" name="telefono" required />
+  <label>¿Número al que más llamas con frecuencia?</label>
+  <input type="text" id="numeroFrecuente">
 
-      <button type="button" onclick="copiarRespuestas()">Copiar Respuestas</button>
-    </form>
+  <button onclick="generarTexto()">Generar texto</button>
+  <button onclick="copiarTexto()">Copiar texto</button>
 
-    <div class="firma">J.R</div>
-  </div>
+  <h3>Texto final:</h3>
+  <textarea id="resultado" readonly></textarea>
+
+  <p>Tuenti Ec</p>
 
   <script>
-    function copiarRespuestas() {
+    function generarTexto() {
       const numeroRecuperar = document.getElementById('numeroRecuperar').value;
-      const correo = document.getElementById('correo').value;
-      const combo = document.querySelector('input[name="combo"]:checked')?.value || "(no seleccionado)";
-      const telefono = document.getElementById('telefono').value;
+      const correoApp = document.getElementById('correoApp').value;
+      const combo = document.getElementById('combo').value;
+      const numeroFrecuente = document.getElementById('numeroFrecuente').value;
 
-      const texto =
-` 
+      const texto = 
+`Formulario de preguntas de seguridad Tuenti
 
 Número a recuperar: ${numeroRecuperar}
 
 1) ¿Cuál es el correo que está asociado a tu cuenta de APP?
-
-${
-  correo}
+${correoApp}
 
 2) ¿Cuál fue el Combo que compraste con más frecuencia en los últimos 3 meses?
-
-${
-  combo}
+${combo}
 
 3) ¿Número al que más llamas con frecuencia?
-
-${telefono}
+${numeroFrecuente}
 
 Tuenti Ec`;
 
-      navigator.clipboard.writeText(texto)
-        .then(() => alert("Respuestas copiadas al portapapeles ✅"))
-        .catch(err => alert("Error al copiar: " + err));
+      document.getElementById('resultado').value = texto;
+    }
+
+    function copiarTexto() {
+      const resultado = document.getElementById('resultado');
+      resultado.select();
+      resultado.setSelectionRange(0, 99999); // Para móviles
+      document.execCommand("copy");
+      alert("¡Texto copiado al portapapeles!");
     }
   </script>
 </body>
