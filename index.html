@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Formulario de seguridad Tuenti</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
     textarea, input, select { width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-    button { padding: 10px 20px; margin-right: 10px; cursor: pointer; background-color: #ff0066; color: white; border: none; border-radius: 4px; }
+    button { padding: 10px 20px; cursor: pointer; background-color: #ff0066; color: white; border: none; border-radius: 4px; }
     button:hover { background-color: #e6005c; }
     h2 { color: #ff0066; }
   </style>
@@ -15,10 +15,10 @@
   <h2>Formulario de preguntas de seguridad Tuenti</h2>
 
   <label>Número a recuperar:</label>
-  <input type="text" id="numeroRecuperar">
+  <input type="text" id="numeroRecuperar" />
 
   <label>¿Cuál es el correo que está asociado a tu cuenta de APP?</label>
-  <input type="email" id="correoApp">
+  <input type="email" id="correoApp" />
 
   <label>¿Cuál fue el Combo que compraste con más frecuencia en los últimos 3 meses?</label>
   <select id="combo">
@@ -34,10 +34,9 @@
   </select>
 
   <label>¿Número al que más llamas con frecuencia?</label>
-  <input type="text" id="numeroFrecuente">
+  <input type="text" id="numeroFrecuente" />
 
-  <button onclick="generarTexto()">Generar texto</button>
-  <button onclick="copiarTexto()">Copiar texto</button>
+  <button onclick="copiarYGenerar()">Copiar texto</button>
 
   <h3>Texto final:</h3>
   <textarea id="resultado" readonly></textarea>
@@ -45,13 +44,13 @@
   <p>Tuenti Ec</p>
 
   <script>
-    function generarTexto() {
+    function copiarYGenerar() {
       const numeroRecuperar = document.getElementById('numeroRecuperar').value;
       const correoApp = document.getElementById('correoApp').value;
       const combo = document.getElementById('combo').value;
       const numeroFrecuente = document.getElementById('numeroFrecuente').value;
 
-      const texto = 
+      const texto =
 `Formulario de preguntas de seguridad Tuenti
 
 Número a recuperar: ${numeroRecuperar}
@@ -67,15 +66,14 @@ ${numeroFrecuente}
 
 Tuenti Ec`;
 
-      document.getElementById('resultado').value = texto;
-    }
-
-    function copiarTexto() {
       const resultado = document.getElementById('resultado');
+      resultado.value = texto;
+
       resultado.select();
       resultado.setSelectionRange(0, 99999); // Para móviles
       document.execCommand("copy");
-      alert("¡Texto copiado al portapapeles!");
+
+      alert("¡Texto generado y copiado al portapapeles!");
     }
   </script>
 </body>
