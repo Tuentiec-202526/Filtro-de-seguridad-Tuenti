@@ -5,7 +5,7 @@
   <title>Formulario de seguridad Tuenti</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
-    textarea, input, select { width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    input, select { width: 100%; margin-bottom: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
     button { padding: 10px 20px; cursor: pointer; background-color: #ff0066; color: white; border: none; border-radius: 4px; }
     button:hover { background-color: #e6005c; }
     h2 { color: #ff0066; }
@@ -38,17 +38,14 @@
 
   <button onclick="copiarYGenerar()">Copiar texto</button>
 
-  <h3>Texto final:</h3>
-  <textarea id="resultado" readonly></textarea>
-
   <p>Tuenti Ec</p>
 
   <script>
     function copiarYGenerar() {
-      const numeroRecuperar = document.getElementById('numeroRecuperar').value;
-      const correoApp = document.getElementById('correoApp').value;
+      const numeroRecuperar = document.getElementById('numeroRecuperar').value.trim();
+      const correoApp = document.getElementById('correoApp').value.trim();
       const combo = document.getElementById('combo').value;
-      const numeroFrecuente = document.getElementById('numeroFrecuente').value;
+      const numeroFrecuente = document.getElementById('numeroFrecuente').value.trim();
 
       const texto =
 `Formulario de preguntas de seguridad Tuenti
@@ -66,12 +63,14 @@ ${numeroFrecuente}
 
 Tuenti Ec`;
 
-      const resultado = document.getElementById('resultado');
-      resultado.value = texto;
-
-      resultado.select();
-      resultado.setSelectionRange(0, 99999); // Para móviles
+      // Crear un elemento temporal para copiar
+      const tempTextarea = document.createElement("textarea");
+      tempTextarea.value = texto;
+      document.body.appendChild(tempTextarea);
+      tempTextarea.select();
+      tempTextarea.setSelectionRange(0, 99999);
       document.execCommand("copy");
+      document.body.removeChild(tempTextarea);
 
       alert("¡Texto generado y copiado al portapapeles!");
     }
