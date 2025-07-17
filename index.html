@@ -52,33 +52,4 @@
       const numeroFrecuente = document.getElementById('numeroFrecuente').value.trim();
 
       const texto =
-`REQUERIMIENTO DEL CLIENTE: ${requerimiento}
-
-Formulario de preguntas de seguridad Tuenti
-
-Número a recuperar: ${numeroRecuperar}
-
-1) ¿Cuál es el correo que está asociado a tu cuenta de APP?
-${correoApp}
-
-2) ¿Cuál fue el Combo que compraste con más frecuencia en los últimos 3 meses?
-${combo}
-
-3) ¿Número al que más llamas con frecuencia?
-${numeroFrecuente}
-
-Tuenti Ec`;
-
-      const tempTextarea = document.createElement("textarea");
-      tempTextarea.value = texto;
-      document.body.appendChild(tempTextarea);
-      tempTextarea.select();
-      tempTextarea.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      document.body.removeChild(tempTextarea);
-
-      alert("¡Texto generado y copiado al portapapeles!");
-    }
-  </script>
-</body>
-</html>
+`REQUERIMIENTO
