@@ -14,6 +14,9 @@
 <body>
   <h2>Formulario de preguntas de seguridad Tuenti</h2>
 
+  <label>Requerimiento del cliente:</label>
+  <input type="text" id="requerimiento" />
+
   <label>Número a recuperar:</label>
   <input type="text" id="numeroRecuperar" />
 
@@ -42,13 +45,16 @@
 
   <script>
     function copiarYGenerar() {
+      const requerimiento = document.getElementById('requerimiento').value.trim();
       const numeroRecuperar = document.getElementById('numeroRecuperar').value.trim();
       const correoApp = document.getElementById('correoApp').value.trim();
       const combo = document.getElementById('combo').value;
       const numeroFrecuente = document.getElementById('numeroFrecuente').value.trim();
 
       const texto =
-`Formulario de preguntas de seguridad Tuenti
+`REQUERIMIENTO DEL CLIENTE: ${requerimiento}
+
+Formulario de preguntas de seguridad Tuenti
 
 Número a recuperar: ${numeroRecuperar}
 
@@ -63,7 +69,6 @@ ${numeroFrecuente}
 
 Tuenti Ec`;
 
-      // Crear un elemento temporal para copiar
       const tempTextarea = document.createElement("textarea");
       tempTextarea.value = texto;
       document.body.appendChild(tempTextarea);
